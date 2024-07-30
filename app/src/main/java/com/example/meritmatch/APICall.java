@@ -27,9 +27,6 @@ public class APICall{
     public interface getTaskStatusCallback {
         void onResponse(Status taskStatus);
     }
-    public interface reserveTaskCallback {
-        void onResponse(Status taskStatus);
-    }
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8000/") // Ensure it's http if you are not using HTTPS
@@ -76,17 +73,17 @@ public class APICall{
 
             }
         });
-
     }
 
-    public void reserve(String User_name,Context context,final reserveTaskCallback callback){
-        Call<Status> call = service.reserve(User_name);
+    public void reserve(String PostedBy,String Reserver,Context context,final getTaskStatusCallback callback){
+        ReserveOperation reserveOperation = new ReserveOperation(PostedBy,Reserver);
+        Call<Status> call = service.reserve(reserveOperation);
         call.enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 if(response.isSuccessful() && response.body() != null){
-                    Status postedStatus = response.body();
-                    callback.onResponse(postedStatus);
+                    Status reservedStatus = response.body();
+                    callback.onResponse(reservedStatus);
                 }
             }
 

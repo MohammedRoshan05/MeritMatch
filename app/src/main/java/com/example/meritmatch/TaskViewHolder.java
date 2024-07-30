@@ -2,7 +2,6 @@ package com.example.meritmatch;
 
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 public class TaskViewHolder extends RecyclerView.ViewHolder {

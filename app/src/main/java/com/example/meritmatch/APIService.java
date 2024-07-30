@@ -31,7 +31,7 @@ interface ApiService {
     Call<Status> getStatus(@Query("User_name") String User_name);
 
     @PUT("/task/reserve")
-    Call<Status> reserve(@Query("User_name") String User_name);
+    Call<Status> reserve(@Body ReserveOperation reserve);
 
     @GET("/tasks")
     Call<List<Task_database>> getTasks();

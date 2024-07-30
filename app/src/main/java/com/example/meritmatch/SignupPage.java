@@ -38,7 +38,7 @@ public class SignupPage extends AppCompatActivity {
                             signup.setText(user.getUser_name());
                             Toast.makeText(SignupPage.this,
                                     "Welcome to Merit Match " + user.getUser_name(), Toast.LENGTH_SHORT).show();
-                            gotoHomePage();
+                            HomePage.passUsername(SignupPage.this,HomePage.class,user.getUser_name());
                         } else {
                             Toast.makeText(SignupPage.this, "Signup failed. Please try again.", Toast.LENGTH_SHORT).show();
                         }
@@ -51,9 +51,5 @@ public class SignupPage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-    }
-    public void gotoHomePage(){
-        Intent intent = new Intent(this,HomePage.class);
-        startActivity(intent);
     }
 }

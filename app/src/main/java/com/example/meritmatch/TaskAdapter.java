@@ -3,10 +3,8 @@ package com.example.meritmatch;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
@@ -14,9 +12,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
     private static final int TYPE_ITEM = 1;
 
     private List<Task_database> tasks;
+    private int selectedPosition = RecyclerView.NO_POSITION; // No position selected by default
+    private OnItemClickListener onItemClickListener; // Listener for item clicks
 
-    public TaskAdapter(List<Task_database> tasks) {
+    public TaskAdapter(List<Task_database> tasks, OnItemClickListener onItemClickListener) {
         this.tasks = tasks;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -33,12 +34,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
-        if (viewType == TYPE_HEADER) {
-            view = inflater.inflate(R.layout.item_layout, parent, false);
-        } else {
-            view = inflater.inflate(R.layout.item_layout, parent, false);
-        }
+        View view = inflater.inflate(R.layout.item_layout, parent, false);
         return new TaskViewHolder(view);
     }
 
@@ -59,11 +55,34 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
             holder.tvReward.setText(String.valueOf(task.getReward()));
             holder.tvStatus.setText(task.getStatus());
             holder.tvResolver.setText(task.getResolver());
+
+            // Highlight the selected row
+            holder.itemView.setBackgroundResource(position == selectedPosition ? R.color.colorRowPressed : R.color.colorRowDefault);
+
+            // Set click listener for each row
+            holder.itemView.setOnClickListener(v -> {
+                int previousPosition = selectedPosition;
+                selectedPosition = holder.getAdapterPosition();
+
+                // Notify the adapter to refresh the rows
+                notifyItemChanged(previousPosition);
+                notifyItemChanged(selectedPosition);
+
+                // Notify the listener
+                if (onItemClickListener != null && position != 0) {
+                    onItemClickListener.onItemClick(task); // Pass the clicked task
+                }
+            });
         }
     }
 
     public void updateTasks(List<Task_database> newTasks) {
         this.tasks = newTasks;
         notifyDataSetChanged(); // Notify the adapter to refresh the RecyclerView
+    }
+
+    // Interface to handle item clicks
+    public interface OnItemClickListener {
+        void onItemClick(Task_database task);
     }
 }

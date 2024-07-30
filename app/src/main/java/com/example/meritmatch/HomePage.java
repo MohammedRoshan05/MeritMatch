@@ -50,10 +50,8 @@ public class HomePage extends AppCompatActivity {
         new APICall().getStatus(User_name, HomePage.this, new APICall.getTaskStatusCallback() {
             @Override
             public void onResponse(Status taskStatus) {
-                if (taskStatus != null) {
-                    if(taskStatus != null){
-                        Status_task.setText(taskStatus.getStatus());
-                    }
+                if(taskStatus != null){
+                    Status_task.setText(taskStatus.getStatus());
                 }
             }
         });
