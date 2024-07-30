@@ -24,7 +24,10 @@ public class APICall{
     public interface postTaskCallback {
         void onResponse(Task task);
     }
-    public interface getTaskStatus {
+    public interface getTaskStatusCallback {
+        void onResponse(Status taskStatus);
+    }
+    public interface reserveTaskCallback {
         void onResponse(Status taskStatus);
     }
 
@@ -57,7 +60,7 @@ public class APICall{
         });
     }
 
-    public void getStatus(String User_name, Context context, final getTaskStatus callback){
+    public void getStatus(String User_name, Context context, final getTaskStatusCallback callback){
         Call<Status> call = service.getStatus(User_name);
         call.enqueue(new Callback<Status>() {
             @Override
@@ -74,6 +77,24 @@ public class APICall{
             }
         });
 
+    }
+
+    public void reserve(String User_name,Context context,final reserveTaskCallback callback){
+        Call<Status> call = service.reserve(User_name);
+        call.enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    Status postedStatus = response.body();
+                    callback.onResponse(postedStatus);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+
+            }
+        });
     }
 
     public void loginUser(String User_name, String Password, final LoginCallback callback) {
