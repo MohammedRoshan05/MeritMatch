@@ -11,12 +11,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListofTasks extends AppCompatActivity {
     private GridView gridView;
-    private DatabaseHelper databaseHelper;
     private GridAdapter gridAdapter;
-    private ArrayList<String> data;
+    private List<Task_database> tasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,22 +24,18 @@ public class ListofTasks extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_listof_tasks);
 
-        gridView = findViewById(R.id.gridview);
-        databaseHelper = new DatabaseHelper(this);
-        data = new ArrayList<>();
+        tasks = new ArrayList<>();
+        GridView gridView = findViewById(R.id.gridview);
+        GridAdapter adapter = new GridAdapter(ListofTasks.this, tasks);
+        gridView.setAdapter(adapter);
 
-        // Fetch data from SQLite
-        Cursor cursor = databaseHelper.getAllData();
-        if (cursor.getCount() != 0) {
-            while (cursor.moveToNext()) {
-                data.add(cursor.getString(1)); // Adding titles
-                data.add(cursor.getString(2)); // Adding data1
-                data.add(cursor.getString(3)); // Adding data2
+        new APICall().getTasks(new APICall.getTasksCallback() {
+            @Override
+            public void onResponse(List<Task_database> tasks) {
+                adapter.updateTasks(tasks);
             }
-        }
+        });
 
-        gridAdapter = new GridAdapter(this, data);
-        gridView.setAdapter(gridAdapter);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

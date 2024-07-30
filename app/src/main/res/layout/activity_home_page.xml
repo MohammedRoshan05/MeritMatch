@@ -8,6 +8,7 @@
     tools:context=".HomePage">
 
     <TextView
+        android:textStyle="bold"
         android:layout_width="161dp"
         android:layout_height="61dp"
         android:layout_marginTop="24dp"
@@ -19,44 +20,53 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/usernameHome"
         android:layout_width="105dp"
         android:layout_height="45dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="152dp"
         android:gravity="center"
         android:text="Username"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="144dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/points_no"
+        android:id="@+id/points_noHome"
         android:layout_width="105dp"
         android:layout_height="45dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="76dp"
         android:gravity="center"
         android:text="Points"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="144dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/Tasks_completed"
+        android:id="@+id/Tasks_completedHome"
         android:layout_width="285dp"
         android:layout_height="47dp"
+        android:layout_marginTop="276dp"
         android:gravity="center"
         android:text="no of tasks completed"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="253dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/status_post"
+        android:id="@+id/status_postHome"
         android:layout_width="294dp"
         android:layout_height="44dp"
+        android:layout_marginBottom="292dp"
         android:gravity="center"
         android:text="Status of posted task"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="371dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/list_tasks"
@@ -71,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/post_tasks"
+        android:id="@+id/post_taskhome"
         android:layout_width="134dp"
         android:layout_height="79dp"
         android:layout_marginEnd="48dp"
