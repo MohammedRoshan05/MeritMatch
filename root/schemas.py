@@ -32,3 +32,7 @@ class Task_Operation(BaseModel):
     Title:str
     Description:str
     Reward:int
+
+class Reserve_Operation(BaseModel):
+    PostedBy:str
+    Reserver:str

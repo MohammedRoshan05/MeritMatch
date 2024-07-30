@@ -15,7 +15,7 @@ def create_user(request:schemas.User_operation,db:Session):
     # if(request.User_name != "" and request.Password != ""):
     if(request.Password and request.Password.strip() and request.User_name and request.User_name.strip()):
         new_user = models.Users(User_name = request.User_name,Password = Hash.bcrypt(request.Password),
-                            Statusof_posted_task = 'None',Karma = 300)
+                            Statusof_posted_task = 'You havent posted any Task',Karma = 300)
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
