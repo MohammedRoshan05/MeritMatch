@@ -43,15 +43,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Tasks_completedHome"
-        android:layout_width="285dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="276dp"
+
+    <Button
+        android:id="@+id/hometocheckPostTask"
+        android:layout_width="208dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="384dp"
         android:gravity="center"
-        android:text="no of tasks completed"
+        android:text="Go to Task posted"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,26 +61,25 @@
         android:id="@+id/status_postHome"
         android:layout_width="131dp"
         android:layout_height="61dp"
-        android:layout_marginBottom="284dp"
+        android:layout_marginBottom="408dp"
         android:gravity="center"
         android:text=""
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintHorizontal_bias="0.792"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <TextView
         android:layout_width="134dp"
         android:layout_height="61dp"
-        android:layout_marginBottom="284dp"
+        android:layout_marginBottom="408dp"
         android:gravity="center"
         android:text="Status of Posted Task"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintHorizontal_bias="0.158"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

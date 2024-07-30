@@ -36,14 +36,6 @@ public class ListofTasks extends AppCompatActivity implements TaskAdapter.OnItem
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        new APICall().getTasks(new APICall.getTasksCallback() {
-//            @Override
-//            public void onResponse(List<Task_database> tasks) {
-//                adapter = new TaskAdapter(tasks, ListofTasks.this);
-//                recyclerView.setAdapter(adapter);
-//            }
-//        });
-
         refreshTasks();
 
         Home = findViewById(R.id.listtaskstoHome);
@@ -60,7 +52,6 @@ public class ListofTasks extends AppCompatActivity implements TaskAdapter.OnItem
         Reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Reserve.setText(reserver);
                 new APICall().reserve(postedBy,reserver, ListofTasks.this, new APICall.getTaskStatusCallback() {
                     @Override
                     public void onResponse(Status taskStatus) {

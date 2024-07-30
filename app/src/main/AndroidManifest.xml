@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".PostedTask"
+            android:exported="false" />
+        <activity
             android:name=".PostTaskScreen"
             android:exported="false" />
         <activity

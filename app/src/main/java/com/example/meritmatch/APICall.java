@@ -28,6 +28,9 @@ public class APICall{
         void onResponse(Status taskStatus);
     }
 
+    public interface TaskApprovalCallback {
+        void onResponse(TaskApproval approval);
+    }
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8000/") // Ensure it's http if you are not using HTTPS
             .addConverterFactory(GsonConverterFactory.create())
@@ -172,6 +175,42 @@ public class APICall{
 
             @Override
             public void onFailure(Call<List<Task_database>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void updateKarma(String PostedBy,String Reserver,Context context,
+                            int Karma,final getTaskStatusCallback callback){
+        ReserveOperation reserveOperation = new ReserveOperation(PostedBy,Reserver);
+        Call<Status> call = service.updateKarma(reserveOperation,Karma);
+        call.enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    Status updationofKarma = response.body();
+                    callback.onResponse(updationofKarma);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+
+            }
+        });
+
+    }
+    public void getTask(String PostedBy,Context context,final TaskApprovalCallback callback){
+        Call<TaskApproval> call = service.getTask(PostedBy);
+        call.enqueue(new Callback<TaskApproval>() {
+            @Override
+            public void onResponse(Call<TaskApproval> call, Response<TaskApproval> response) {
+                TaskApproval approval = response.body();
+                callback.onResponse(approval);
+            }
+
+            @Override
+            public void onFailure(Call<TaskApproval> call, Throwable t) {
 
             }
         });

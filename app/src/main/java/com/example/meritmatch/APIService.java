@@ -27,14 +27,19 @@ interface ApiService {
     @POST("task/postTask")
     Call<Task> postTask(@Body Task task);
 
-    @GET("/task/getStatus")
-    Call<Status> getStatus(@Query("User_name") String User_name);
+    @GET("/task/getStatus/{User_name}")
+    Call<Status> getStatus(@Path("User_name") String userName);
 
     @PUT("/task/reserve")
     Call<Status> reserve(@Body ReserveOperation reserve);
 
     @GET("/tasks")
     Call<List<Task_database>> getTasks();
+
+    @PUT("/task/updateKarma")
+    Call<Status> updateKarma(@Body ReserveOperation reserveOperation, @Query("Karma") int karma);
+    @GET("/task/{User_name}")
+    Call<TaskApproval> getTask(@Path("User_name") String userName);
 
 }
 

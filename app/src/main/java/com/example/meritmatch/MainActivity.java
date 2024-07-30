@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(User user) {
                 User_name = user.getUser_name();
-                login.setText(User_name);
             }
         });
 

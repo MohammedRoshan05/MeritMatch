@@ -20,7 +20,7 @@ import org.w3c.dom.Text;
 public class HomePage extends AppCompatActivity {
 
     String User_name;
-    Button posttask,goToTasks;
+    Button posttask,goToTasks,HometoCheck;
     TextView UserName_textbox,Points_textbox,Status_task;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,18 @@ public class HomePage extends AppCompatActivity {
         UserName_textbox = findViewById(R.id.usernameHome);
         Points_textbox = findViewById(R.id.points_noHome);
         Status_task = findViewById(R.id.status_postHome);
+        HometoCheck = findViewById(R.id.hometocheckPostTask);
 
         Intent intent = getIntent();
         User_name = intent.getStringExtra("Username");
         UserName_textbox.setText(User_name);
+
+        HometoCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                passUsername(HomePage.this,PostedTask.class,User_name);
+            }
+        });
 
         new APICall().getUser(User_name, HomePage.this, new APICall.UserCallback() {
             @Override
