@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -42,8 +41,8 @@ public class PostTaskScreen extends AppCompatActivity {
                         Descriptionbox.getText().toString(), Integer.parseInt(Karmabox.getText().toString()),
                         new APICall.postTaskCallback() {
                             @Override
-                            public void onResponse(Task task) {
-                                if (task != null) {
+                            public void onResponse(ClassTask classTask) {
+                                if (classTask != null) {
                                     Toast.makeText(PostTaskScreen.this,
                                             "Task successfully posted", Toast.LENGTH_SHORT).show();
                                 } else {

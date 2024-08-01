@@ -11,18 +11,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
-    private List<Task_database> tasks;
-    private int selectedPosition = RecyclerView.NO_POSITION; // No position selected by default
-    private OnItemClickListener onItemClickListener; // Listener for item clicks
+    private List<ClassTask_database> tasks;
+    private int selectedPosition = RecyclerView.NO_POSITION;
+    private OnItemClickListener onItemClickListener;
 
-    public TaskAdapter(List<Task_database> tasks, OnItemClickListener onItemClickListener) {
+    public TaskAdapter(List<ClassTask_database> tasks, OnItemClickListener onItemClickListener) {
         this.tasks = tasks;
         this.onItemClickListener = onItemClickListener;
     }
 
     @Override
     public int getItemCount() {
-        return tasks.size() + 1; // +1 for the header row
+        return tasks.size() + 1;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
             holder.tvStatus.setText("Status");
             holder.tvResolver.setText("Resolver");
         } else {
-            Task_database task = tasks.get(position - 1);
+            ClassTask_database task = tasks.get(position - 1);
             holder.tvPostedBy.setText(task.getPostedBy());
             holder.tvTitle.setText(task.getTitle());
             holder.tvDescription.setText(task.getDescription());
@@ -56,33 +56,33 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
             holder.tvStatus.setText(task.getStatus());
             holder.tvResolver.setText(task.getResolver());
 
-            // Highlight the selected row
+
             holder.itemView.setBackgroundResource(position == selectedPosition ? R.color.colorRowPressed : R.color.colorRowDefault);
 
-            // Set click listener for each row
+
             holder.itemView.setOnClickListener(v -> {
                 int previousPosition = selectedPosition;
                 selectedPosition = holder.getAdapterPosition();
 
-                // Notify the adapter to refresh the rows
+
                 notifyItemChanged(previousPosition);
                 notifyItemChanged(selectedPosition);
 
-                // Notify the listener
+
                 if (onItemClickListener != null && position != 0) {
-                    onItemClickListener.onItemClick(task); // Pass the clicked task
+                    onItemClickListener.onItemClick(task);
                 }
             });
         }
     }
 
-    public void updateTasks(List<Task_database> newTasks) {
+    public void updateTasks(List<ClassTask_database> newTasks) {
         this.tasks = newTasks;
-        notifyDataSetChanged(); // Notify the adapter to refresh the RecyclerView
+        notifyDataSetChanged();
     }
 
-    // Interface to handle item clicks
+
     public interface OnItemClickListener {
-        void onItemClick(Task_database task);
+        void onItemClick(ClassTask_database task);
     }
 }

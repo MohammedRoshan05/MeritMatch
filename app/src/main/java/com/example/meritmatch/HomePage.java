@@ -5,17 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import org.w3c.dom.Text;
 
 public class HomePage extends AppCompatActivity {
 
@@ -48,18 +44,18 @@ public class HomePage extends AppCompatActivity {
 
         new APICall().getUser(User_name, HomePage.this, new APICall.UserCallback() {
             @Override
-            public void onResponse(User user) {
-                if (user != null) {
-                    UserName_textbox.setText(user.getUser_name());
-                    Points_textbox.setText("" + user.getKarma());
+            public void onResponse(ClassUser classUser) {
+                if (classUser != null) {
+                    UserName_textbox.setText(classUser.getUser_name());
+                    Points_textbox.setText("" + classUser.getKarma());
                 }
             }
         });
         new APICall().getStatus(User_name, HomePage.this, new APICall.getTaskStatusCallback() {
             @Override
-            public void onResponse(Status taskStatus) {
-                if(taskStatus != null){
-                    Status_task.setText(taskStatus.getStatus());
+            public void onResponse(ClassStatus taskClassStatus) {
+                if(taskClassStatus != null){
+                    Status_task.setText(taskClassStatus.getStatus());
                 }
             }
         });
@@ -73,7 +69,7 @@ public class HomePage extends AppCompatActivity {
         goToTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                passUsername(HomePage.this, ListofTasks.class,User_name);
+                passUsername(HomePage.this, ClassListofTasks.class,User_name);
             }
         });
 

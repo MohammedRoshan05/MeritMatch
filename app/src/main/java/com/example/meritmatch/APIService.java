@@ -1,7 +1,5 @@
 package com.example.meritmatch;
 
-import android.util.Log;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -15,31 +13,31 @@ import retrofit2.http.Query;
 interface ApiService {
     //User Endpoints
     @GET("user/{User_name}")
-    Call<User> getUser(@Path("User_name") String userName);
+    Call<ClassUser> getUser(@Path("User_name") String userName);
 
     @POST("user/login")
-    Call<LoginResponse> loginUser(@Body UserOperation user);
+    Call<ClassLoginResponse> loginUser(@Body ClassUserOperation user);
 
     @POST("user/signup")
-    Call<User> signupUser(@Body UserOperation user);
+    Call<ClassUser> signupUser(@Body ClassUserOperation user);
 
     //Task Endpoints
     @POST("task/postTask")
-    Call<Task> postTask(@Body Task task);
+    Call<ClassTask> postTask(@Body ClassTask classTask);
 
     @GET("/task/getStatus/{User_name}")
-    Call<Status> getStatus(@Path("User_name") String userName);
+    Call<ClassStatus> getStatus(@Path("User_name") String userName);
 
     @PUT("/task/reserve")
-    Call<Status> reserve(@Body ReserveOperation reserve);
+    Call<ClassStatus> reserve(@Body ClassReserveOperation reserve);
 
     @GET("/tasks")
-    Call<List<Task_database>> getTasks();
+    Call<List<ClassTask_database>> getTasks();
 
     @PUT("/task/updateKarma")
-    Call<Status> updateKarma(@Body ReserveOperation reserveOperation, @Query("Karma") int karma);
+    Call<ClassStatus> updateKarma(@Body ClassReserveOperation classReserveOperation, @Query("Karma") int karma);
     @GET("/task/{User_name}")
-    Call<TaskApproval> getTask(@Path("User_name") String userName);
+    Call<ClassTaskApproval> getTask(@Path("User_name") String userName);
 
 }
 

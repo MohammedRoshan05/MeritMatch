@@ -1,6 +1,6 @@
 package com.example.meritmatch;
 
-public class LoginResponse {
+public class ClassLoginResponse {
     private String message;
     public String getMessage() {
         return message;

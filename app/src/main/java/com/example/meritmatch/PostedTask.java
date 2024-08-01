@@ -28,7 +28,7 @@ public class PostedTask extends AppCompatActivity {
 
         new APICall().getTask(postedBy, PostedTask.this, new APICall.TaskApprovalCallback() {
             @Override
-            public void onResponse(TaskApproval approval) {
+            public void onResponse(ClassTaskApproval approval) {
                 if(approval != null){
                     resolver = approval.getResolver();
                     points = approval.getPoints();
@@ -51,8 +51,8 @@ public class PostedTask extends AppCompatActivity {
 //                ApproveTask.setText(resolver);
                 new APICall().updateKarma(postedBy, resolver, PostedTask.this, points, new APICall.getTaskStatusCallback() {
                     @Override
-                    public void onResponse(Status taskStatus) {
-                        if (taskStatus != null){
+                    public void onResponse(ClassStatus taskClassStatus) {
+                        if (taskClassStatus != null){
                             Toast.makeText(PostedTask.this,"Points have been updated",
                                     Toast.LENGTH_SHORT).show();
                         }

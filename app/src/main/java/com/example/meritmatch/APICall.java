@@ -13,168 +13,168 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APICall{
     public interface UserCallback {
-        void onResponse(User user);
+        void onResponse(ClassUser classUser);
     }
     public interface LoginCallback {
-        void onResponse(LoginResponse response);
+        void onResponse(ClassLoginResponse response);
     }
     public interface SignupCallback {
-        void onResponse(User user);
+        void onResponse(ClassUser classUser);
     }
     public interface postTaskCallback {
-        void onResponse(Task task);
+        void onResponse(ClassTask classTask);
     }
     public interface getTaskStatusCallback {
-        void onResponse(Status taskStatus);
+        void onResponse(ClassStatus taskClassStatus);
     }
 
     public interface TaskApprovalCallback {
-        void onResponse(TaskApproval approval);
+        void onResponse(ClassTaskApproval approval);
     }
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/") // Ensure it's http if you are not using HTTPS
+            .baseUrl("http://10.0.2.2:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
     ApiService service = retrofit.create(ApiService.class);
 
     public void getUser(String User_name, Context context, final UserCallback callback) {
-        Call<User> call = service.getUser(User_name);
-        call.enqueue(new Callback<User>() {
+        Call<ClassUser> call = service.getUser(User_name);
+        call.enqueue(new Callback<ClassUser>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<ClassUser> call, Response<ClassUser> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    User user = response.body();
-                    Log.d("API Response", "User Name: " + user.getUser_name());
-                    Log.d("API Response", "Karma: " + user.getKarma());
-                    callback.onResponse(user);
+                    ClassUser classUser = response.body();
+                    Log.d("API Response", "User Name: " + classUser.getUser_name());
+                    Log.d("API Response", "Karma: " + classUser.getKarma());
+                    callback.onResponse(classUser);
                 } else {
                     Log.e("API Response", "Response not successful or body is null");
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<ClassUser> call, Throwable t) {
                 Log.e("API Response", "Error: " + t.getMessage());
             }
         });
     }
 
     public void getStatus(String User_name, Context context, final getTaskStatusCallback callback){
-        Call<Status> call = service.getStatus(User_name);
-        call.enqueue(new Callback<Status>() {
+        Call<ClassStatus> call = service.getStatus(User_name);
+        call.enqueue(new Callback<ClassStatus>() {
             @Override
-            public void onResponse(Call<Status> call, Response<Status> response) {
+            public void onResponse(Call<ClassStatus> call, Response<ClassStatus> response) {
                 if(response.isSuccessful() && response.body() != null){
-                    Status postedStatus = response.body();
-                    callback.onResponse(postedStatus);
+                    ClassStatus postedClassStatus = response.body();
+                    callback.onResponse(postedClassStatus);
                 }
             }
 
             @Override
-            public void onFailure(Call<Status> call, Throwable t) {
+            public void onFailure(Call<ClassStatus> call, Throwable t) {
 
             }
         });
     }
 
     public void reserve(String PostedBy,String Reserver,Context context,final getTaskStatusCallback callback){
-        ReserveOperation reserveOperation = new ReserveOperation(PostedBy,Reserver);
-        Call<Status> call = service.reserve(reserveOperation);
-        call.enqueue(new Callback<Status>() {
+        ClassReserveOperation classReserveOperation = new ClassReserveOperation(PostedBy,Reserver);
+        Call<ClassStatus> call = service.reserve(classReserveOperation);
+        call.enqueue(new Callback<ClassStatus>() {
             @Override
-            public void onResponse(Call<Status> call, Response<Status> response) {
+            public void onResponse(Call<ClassStatus> call, Response<ClassStatus> response) {
                 if(response.isSuccessful() && response.body() != null){
-                    Status reservedStatus = response.body();
-                    callback.onResponse(reservedStatus);
+                    ClassStatus reservedClassStatus = response.body();
+                    callback.onResponse(reservedClassStatus);
                 }
             }
 
             @Override
-            public void onFailure(Call<Status> call, Throwable t) {
+            public void onFailure(Call<ClassStatus> call, Throwable t) {
 
             }
         });
     }
 
     public void loginUser(String User_name, String Password, final LoginCallback callback) {
-        UserOperation userOperation = new UserOperation(User_name, Password);
-        Call<LoginResponse> call = service.loginUser(userOperation);
-        call.enqueue(new Callback<LoginResponse>() {
+        ClassUserOperation classUserOperation = new ClassUserOperation(User_name, Password);
+        Call<ClassLoginResponse> call = service.loginUser(classUserOperation);
+        call.enqueue(new Callback<ClassLoginResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+            public void onResponse(Call<ClassLoginResponse> call, Response<ClassLoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    LoginResponse loginResponse = response.body();
-                    callback.onResponse(loginResponse);
+                    ClassLoginResponse classLoginResponse = response.body();
+                    callback.onResponse(classLoginResponse);
                 } else {
                     Log.e("API Response", "Response not successful or body is null");
                 }
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<ClassLoginResponse> call, Throwable t) {
                 Log.e("API Response", "Error: " + t.getMessage());
             }
         });
     }
     public void signupUser(String User_name, String Password, final SignupCallback callback) {
-        UserOperation userOperation = new UserOperation(User_name, Password);
-        Call<User> call = service.signupUser(userOperation);
-        call.enqueue(new Callback<User>() {
+        ClassUserOperation classUserOperation = new ClassUserOperation(User_name, Password);
+        Call<ClassUser> call = service.signupUser(classUserOperation);
+        call.enqueue(new Callback<ClassUser>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<ClassUser> call, Response<ClassUser> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    User user = response.body();
-                    callback.onResponse(user);
+                    ClassUser classUser = response.body();
+                    callback.onResponse(classUser);
                 } else {
                     Log.e("API Response", "Response not successful or body is null");
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<ClassUser> call, Throwable t) {
                 Log.e("API Response", "Error: " + t.getMessage());
             }
         });
     }
     public void postTask(String PostedBy, String Title, String Description,
     int Reward,final postTaskCallback callback){
-        Task toPosttask = new Task(PostedBy,Title,Description,Reward);
-        Call<Task> call = service.postTask(toPosttask);
-        call.enqueue(new Callback<Task>() {
+        ClassTask toPosttask = new ClassTask(PostedBy,Title,Description,Reward);
+        Call<ClassTask> call = service.postTask(toPosttask);
+        call.enqueue(new Callback<ClassTask>() {
             @Override
-            public void onResponse(Call<Task> call, Response<Task> response) {
+            public void onResponse(Call<ClassTask> call, Response<ClassTask> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Task postedTask = response.body();
-                    callback.onResponse(postedTask);
+                    ClassTask postedClassTask = response.body();
+                    callback.onResponse(postedClassTask);
                 } else {
                     Log.e("API Response", "Response not successful or body is null");
                 }
             }
 
             @Override
-            public void onFailure(Call<Task> call, Throwable t) {
+            public void onFailure(Call<ClassTask> call, Throwable t) {
                 Log.e("API Response", "Error: " + t.getMessage());
             }
         });
     }
 
     public interface getTasksCallback {
-        void onResponse(List<Task_database> tasks);
+        void onResponse(List<ClassTask_database> tasks);
     }
     public void getTasks(final getTasksCallback callback){
-        Call<List<Task_database>> call = service.getTasks();
-        call.enqueue(new Callback<List<Task_database>>() {
+        Call<List<ClassTask_database>> call = service.getTasks();
+        call.enqueue(new Callback<List<ClassTask_database>>() {
             @Override
-            public void onResponse(Call<List<Task_database>> call, Response<List<Task_database>> response) {
+            public void onResponse(Call<List<ClassTask_database>> call, Response<List<ClassTask_database>> response) {
                 if(response.isSuccessful() && response.body() != null){
-                    List<Task_database> tasks = response.body();
+                    List<ClassTask_database> tasks = response.body();
                     callback.onResponse(tasks);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Task_database>> call, Throwable t) {
+            public void onFailure(Call<List<ClassTask_database>> call, Throwable t) {
 
             }
         });
@@ -182,35 +182,35 @@ public class APICall{
 
     public void updateKarma(String PostedBy,String Reserver,Context context,
                             int Karma,final getTaskStatusCallback callback){
-        ReserveOperation reserveOperation = new ReserveOperation(PostedBy,Reserver);
-        Call<Status> call = service.updateKarma(reserveOperation,Karma);
-        call.enqueue(new Callback<Status>() {
+        ClassReserveOperation classReserveOperation = new ClassReserveOperation(PostedBy,Reserver);
+        Call<ClassStatus> call = service.updateKarma(classReserveOperation,Karma);
+        call.enqueue(new Callback<ClassStatus>() {
             @Override
-            public void onResponse(Call<Status> call, Response<Status> response) {
+            public void onResponse(Call<ClassStatus> call, Response<ClassStatus> response) {
                 if(response.isSuccessful() && response.body() != null){
-                    Status updationofKarma = response.body();
+                    ClassStatus updationofKarma = response.body();
                     callback.onResponse(updationofKarma);
                 }
             }
 
             @Override
-            public void onFailure(Call<Status> call, Throwable t) {
+            public void onFailure(Call<ClassStatus> call, Throwable t) {
 
             }
         });
 
     }
     public void getTask(String PostedBy,Context context,final TaskApprovalCallback callback){
-        Call<TaskApproval> call = service.getTask(PostedBy);
-        call.enqueue(new Callback<TaskApproval>() {
+        Call<ClassTaskApproval> call = service.getTask(PostedBy);
+        call.enqueue(new Callback<ClassTaskApproval>() {
             @Override
-            public void onResponse(Call<TaskApproval> call, Response<TaskApproval> response) {
-                TaskApproval approval = response.body();
+            public void onResponse(Call<ClassTaskApproval> call, Response<ClassTaskApproval> response) {
+                ClassTaskApproval approval = response.body();
                 callback.onResponse(approval);
             }
 
             @Override
-            public void onFailure(Call<TaskApproval> call, Throwable t) {
+            public void onFailure(Call<ClassTaskApproval> call, Throwable t) {
 
             }
         });

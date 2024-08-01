@@ -1,10 +1,10 @@
 package com.example.meritmatch;
 
-public class TaskApproval {
+public class ClassTaskApproval {
     String Resolver;
     int Points;
 
-    public TaskApproval(String resolver, int points) {
+    public ClassTaskApproval(String resolver, int points) {
         Resolver = resolver;
         Points = points;
     }

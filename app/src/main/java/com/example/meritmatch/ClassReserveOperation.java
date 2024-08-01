@@ -1,10 +1,10 @@
 package com.example.meritmatch;
 
-public class ReserveOperation {
+public class ClassReserveOperation {
     String PostedBy;
     String Reserver;
 
-    public ReserveOperation(String postedBy, String reserver) {
+    public ClassReserveOperation(String postedBy, String reserver) {
         PostedBy = postedBy;
         Reserver = reserver;
     }

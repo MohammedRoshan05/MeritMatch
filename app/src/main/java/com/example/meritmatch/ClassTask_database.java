@@ -1,18 +1,21 @@
 package com.example.meritmatch;
 
-import android.content.Intent;
-
-public class Task {
+public class ClassTask_database {
     String PostedBy;
     String Title;
     String Description;
     int Reward;
+    String Status;
+    String Resolver;
 
-    public Task(String postedBy, String title, String description, int reward) {
+    public ClassTask_database(String postedBy, String title, String description,
+                              int reward, String status, String resolver) {
         PostedBy = postedBy;
         Title = title;
         Description = description;
         Reward = reward;
+        Status = status;
+        Resolver = resolver;
     }
 
     public String getPostedBy() {
@@ -45,5 +48,21 @@ public class Task {
 
     public void setReward(int reward) {
         Reward = reward;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getResolver() {
+        return Resolver;
+    }
+
+    public void setResolver(String resolver) {
+        Resolver = resolver;
     }
 }

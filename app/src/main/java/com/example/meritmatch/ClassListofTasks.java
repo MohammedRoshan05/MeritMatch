@@ -1,12 +1,9 @@
 package com.example.meritmatch;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListofTasks extends AppCompatActivity implements TaskAdapter.OnItemClickListener {
+public class ClassListofTasks extends AppCompatActivity implements TaskAdapter.OnItemClickListener {
     String postedBy,reserver;
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
-    private List<Task_database> tasks = new ArrayList<>();
+    private List<ClassTask_database> tasks = new ArrayList<>();
     Button Home,Reserve;
 
     @Override
@@ -45,16 +42,16 @@ public class ListofTasks extends AppCompatActivity implements TaskAdapter.OnItem
         Home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomePage.passUsername(ListofTasks.this, HomePage.class,reserver);
+                HomePage.passUsername(ClassListofTasks.this, HomePage.class,reserver);
             }
         });
 
         Reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new APICall().reserve(postedBy,reserver, ListofTasks.this, new APICall.getTaskStatusCallback() {
+                new APICall().reserve(postedBy,reserver, ClassListofTasks.this, new APICall.getTaskStatusCallback() {
                     @Override
-                    public void onResponse(Status taskStatus) {
+                    public void onResponse(ClassStatus taskClassStatus) {
                         refreshTasks();
                     }
                 });
@@ -67,15 +64,15 @@ public class ListofTasks extends AppCompatActivity implements TaskAdapter.OnItem
             return insets;
         });
     }
-    public void onItemClick(Task_database task) {
-        postedBy = task.getPostedBy(); // Example: Assign the reserved part to variable
+    public void onItemClick(ClassTask_database task) {
+        postedBy = task.getPostedBy();
 
     }
     public void refreshTasks(){
         new APICall().getTasks(new APICall.getTasksCallback() {
             @Override
-            public void onResponse(List<Task_database> tasks) {
-                adapter = new TaskAdapter(tasks, ListofTasks.this);
+            public void onResponse(List<ClassTask_database> tasks) {
+                adapter = new TaskAdapter(tasks, ClassListofTasks.this);
                 recyclerView.setAdapter(adapter);
             }
         });

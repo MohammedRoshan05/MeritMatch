@@ -1,6 +1,5 @@
 package com.example.meritmatch;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,12 +32,12 @@ public class SignupPage extends AppCompatActivity {
                 String password = passwordInput.getText().toString();
                 new APICall().signupUser(username, password, new APICall.SignupCallback() {
                     @Override
-                    public void onResponse(User user) {
-                        if (user != null) {
-                            signup.setText(user.getUser_name());
+                    public void onResponse(ClassUser classUser) {
+                        if (classUser != null) {
+                            signup.setText(classUser.getUser_name());
                             Toast.makeText(SignupPage.this,
-                                    "Welcome to Merit Match " + user.getUser_name(), Toast.LENGTH_SHORT).show();
-                            HomePage.passUsername(SignupPage.this,HomePage.class,user.getUser_name());
+                                    "Welcome to Merit Match " + classUser.getUser_name(), Toast.LENGTH_SHORT).show();
+                            HomePage.passUsername(SignupPage.this,HomePage.class, classUser.getUser_name());
                         } else {
                             Toast.makeText(SignupPage.this, "Signup failed. Please try again.", Toast.LENGTH_SHORT).show();
                         }

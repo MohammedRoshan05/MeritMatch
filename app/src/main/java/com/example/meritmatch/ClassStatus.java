@@ -1,6 +1,6 @@
 package com.example.meritmatch;
 
-public class Status {
+public class ClassStatus {
     String Status;
 
     public String getStatus() {
@@ -11,7 +11,7 @@ public class Status {
         Status = status;
     }
 
-    public Status(String status) {
+    public ClassStatus(String status) {
         Status = status;
     }
 }

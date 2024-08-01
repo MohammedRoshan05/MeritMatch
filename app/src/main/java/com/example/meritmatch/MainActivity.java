@@ -1,6 +1,5 @@
 package com.example.meritmatch;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         new APICall().getUser("Roshan",this, new APICall.UserCallback() {
             @Override
-            public void onResponse(User user) {
-                User_name = user.getUser_name();
+            public void onResponse(ClassUser classUser) {
+                User_name = classUser.getUser_name();
             }
         });
 
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 new APICall().loginUser(usernameInput.getText().toString(),
                         passwordInput.getText().toString(), new APICall.LoginCallback() {
                     @Override
-                    public void onResponse(LoginResponse response) {
+                    public void onResponse(ClassLoginResponse response) {
                         if (response.getMessage().equals("Login successful")) {
                             Toast.makeText(MainActivity.this,
                                     response.getMessage().toString(),Toast.LENGTH_SHORT).show();

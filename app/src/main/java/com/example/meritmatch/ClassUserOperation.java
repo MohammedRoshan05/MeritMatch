@@ -1,11 +1,11 @@
 package com.example.meritmatch;
 
-public class UserOperation {
+public class ClassUserOperation {
 
     public String User_name;
     public String Password;
 
-    public UserOperation(String user_name, String password) {
+    public ClassUserOperation(String user_name, String password) {
         User_name = user_name;
         Password = password;
     }

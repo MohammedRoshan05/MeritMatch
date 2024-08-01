@@ -1,11 +1,8 @@
 package com.example.meritmatch;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
-    public String User_name;
-    public int Karma;
-
+public class ClassSignUpResponse {
+    private String User_name;
+    private int Karma;
     public String getUser_name() {
         return User_name;
     }
